@@ -24,7 +24,7 @@ class Masque(models.Model):
     bio = models.TextField()
 
     def __str__(self):
-        return self. name+" " + self.city
+        return f"{self.name} {self.city.name}"
 
 
 class Staff(models.Model):
@@ -43,7 +43,7 @@ class Staff(models.Model):
     masque = models.ForeignKey(Masque, related_name='masque', on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.f_name+" " + self.masque.name
+        return f"{self.f_name} {self.masque.name}"
 
 
 class ImageMasque(models.Model):
@@ -51,19 +51,19 @@ class ImageMasque(models.Model):
     image = models.ImageField(upload_to="masque/")
 
     def __str__(self):
-        return self.masque.name
+        return self.masqueimg.name
     
 
 class PrayerTime(models.Model):
     frm = models.DateField()
-    morning = models.DateTimeField()
-    Afternoon = models.DateTimeField()
-    Evening = models.DateTimeField()
-    Night = models.DateTimeField()
-    Midnight = models.DateTimeField()
+    morning = models.TimeField()
+    Afternoon = models.TimeField()
+    Evening = models.TimeField()
+    Night = models.TimeField()
+    Midnight = models.TimeField()
     to = models.DateField()
-    masquet = models.ForeignKey(Masque, related_name='masque_time', on_delete=models.CASCADE)
+    masquet = models.OneToOneField(Masque, related_name='masque_time', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.masque.name+" " + self.masque.city.name
+        return f"{self.masquet.name} {self.masquet.city.name}"
     
