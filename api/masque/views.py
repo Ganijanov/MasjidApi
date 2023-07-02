@@ -6,15 +6,15 @@ from main import models
 
 @api_view(['GET'])
 def list_masques(request):
+    masjid_list = []
     masques = models.Masque.objects.all()
-    image_masque = models.ImageMasque.objects.all()
-
-    serializer_masque = serializers.MasqueSer(masques, many=True)
-    serializer_image = serializers.ImageMasqueSer(image_masque, many=True)
-
+    for masque in masques:
+        image_masque = models.ImageMasque.objects.filter(masqueimg=masque)
+        masque.image = image_masque
+        masjid_list.append(masque)
+    serializer_masque = serializers.MasqueSer(masjid_list, many=True)    
     context = {
             'masque':serializer_masque.data,
-            'image':serializer_image.data
             }
     return Response(context)
 
@@ -37,3 +37,5 @@ def masque_detail(request, pk):
         'prayert':serializer_prayert.data
     }
     return Response(context)
+
+
