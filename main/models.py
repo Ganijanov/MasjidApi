@@ -28,7 +28,6 @@ class Masque(models.Model):
 
 
 class Staff(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
     CHOICE = {
         (1,'Imom'),
         (2,'Imom hatib'),

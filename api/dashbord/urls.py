@@ -11,4 +11,7 @@ urlpatterns = [
     path('masque/create', views.create_masque),
     path('masque/update/<int:pk>', views.update_masque),
     path('masque/delate/<int:pk>', views.delate_masque),
+    path('create/staff', views.create_staff),
+    path('update/staff/<int:pk>', views.update_staff),
+    path('delate/staff/<int:pk>', views.delate_staff),
 ]
